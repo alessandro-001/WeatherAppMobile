@@ -27,6 +27,7 @@ export default function App() {
     .then((data) => {
       setLat(data.coord.lat);
       setLong(data.coord.lon);
+      //console.log(data);
     });
   }
 
