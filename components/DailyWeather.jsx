@@ -9,4 +9,4 @@ const DailyWeather = () => {
   )
 }
 
-export default DailyWeather
+export default DailyWeather;

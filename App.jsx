@@ -27,39 +27,41 @@ export default function App() {
     .then((data) => {
       setLat(data.coord.lat);
       setLong(data.coord.lon);
-      //console.log(data);
+      console.log(data);
     });
   }
 
   //fetch latitude and longitude by postcode
   const fetchByPostcodelHandler = () => {
     fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?key=${config.GOOGLE_KEY}&components=postal_code:${postalCode}`
+      `https://maps.googleapis.com/maps/api/geocode/json?key=${config.GOOGLE_KEY}&components=postal_code:${postCode}`
     )
     .then((res) => res.json())
     .then((data) => {
       setLat(data.results[0].geometry.location.lat);
-      setLong(data.results[0].geometry.location.lng);
+      setLong(data.results[0].geometry.location.lng); //to check later: lng
+      console.log(data);
     });
   };
 
   //update weather info when location change (lat, long)
   useEffect(() => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=hourly,minutely&units=metric&appid=${config.API_KEY}`,
-      { signal }
-    )
-    .then((res) => res.json())
-    .then((data) => {
-      setWeather(data);
-    })
-    .catch((err) => {
-      console.log("error", err);
-    });
-    return () => controller.abort();
+    if (lat !== undefined && long !== undefined) {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${config.API_KEY}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setWeather(data);
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log("error", err);
+        });
+    }
   }, [lat, long]);
 
-
+  
   return (
     <>
       <View style={styles.container}>
@@ -74,6 +76,7 @@ export default function App() {
           setPostCode={setPostCode}
           postCode={postCode}
         />
+        <CurrentWeather currentWeather={weather} timezone={weather.timezone}/>
         <StatusBar style="auto" />
       </View>
     </>
