@@ -1,61 +1,32 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 
-const SearchWeather = ({
-  toggleSearch,
-  setToggleSearch,
-  city,
-  setCity,
-  postCode,
-  setPostCode,
-  fetchLatLongHandler,
-  fetchByPostcodelHandler,
-}) => {
-
-    // Event handler for the form submission
-    const handleSubmit = (e) => {
-        if (toggleSearch === "city") {
-            fetchLatLongHandler(); // Fetch data by city
-        }
-        if (toggleSearch === "postcode") {
-            fetchByPostcodelHandler(); // Fetch data by postcode
+const SearchWeather = ({ toggleSearch, setToggleSearch, city, setCity, fetchWeatherByCity }) => {
+  
+    const handleSearch = () => {
+        if (city) {
+        fetchWeatherByCity();
         }
     };
 
-    // Set the search mode to city
-    const setToggleByCity = () => {
-        setToggleSearch("city");
-    };
-
-    // Set the search mode to postcode
-    const setToggleByPostCode = () => {
-        setToggleSearch("postcode");
-    };
+//   const setToggleByCity = () => {
+//     setToggleSearch('city');
+//   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.buttonLbl}>Search by: </Text>
+      <Text style={styles.buttonLbl}>Search by City: </Text>
       <View style={styles.search}>
-        <Button
-            title="City"
-            color={toggleSearch === "city" ? "white" : "rgba(255, 255, 255, 0.6)"}
-            accessibilityLabel="Search weather by city"
-            onPress={setToggleByCity}
-        />
-        <Button
-            title="Postcode"
-            color={toggleSearch === "postcode" ? "white" : "rgba(255, 255, 255, 0.6)"}
-            accessibilityLabel="Search weather by postcode"
-            onPress={setToggleByPostCode}
-        />
         <TextInput
-            onChangeText={toggleSearch === "city" ? setCity : setPostCode}
-            value={toggleSearch === "city" ? city : postCode}
-            placeholder={
-              toggleSearch === "city" ? "City Name" : "Postcode"
-            }
-            onSubmitEditing={handleSubmit}
+          style={styles.input}
+          onChangeText={setCity}
+          value={city}
+          placeholder="Enter City Name"
+          onSubmitEditing={handleSearch}
         />
+        <TouchableOpacity style={styles.button} onPress={handleSearch}>
+          <Text style={styles.buttonText}>Search</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -63,21 +34,45 @@ const SearchWeather = ({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: 60,
-    backgroundColor: 'lightgray',
-    padding: 10,
-    borderRadius: 15,
+    marginTop: 20,
   },
   search: {
     flexDirection: 'row',
+    marginLeft: 10,
+    marginRight: 10, 
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    borderColor: 'lightblue',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginRight: 10,
+    paddingLeft: 10,
+    fontWeight: 'bold',
+    color: 'lightblue'
+  },
+  button: {
+    backgroundColor: 'lightblue',
+    borderRadius: 5,
+    borderColor: 'blue',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  buttonText: {
+    color: 'black',
+    fontWeight: 'bold'
   },
   buttonLbl: {
-    color: 'black',
-    marginRight: 10,
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 40,
+    marginBottom: 20,
+    padding: 10,
+    color: 'lightblue'
   },
+  
 });
 
 export default SearchWeather;

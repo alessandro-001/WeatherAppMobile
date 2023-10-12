@@ -4,7 +4,7 @@ import React from 'react';
 const CurrentWeather = ({ currentWeather }) => {
   if (!currentWeather || !currentWeather.weather || !currentWeather.weather[0] || !currentWeather.main) {
     console.log('Invalid:', currentWeather);
-    return <Text>Loading...</Text>;
+    return <Text style={{marginTop: 50, color: 'lightblue'}}>Please enter a city...</Text>;
   }
 
   console.log(currentWeather);
@@ -29,20 +29,22 @@ const CurrentWeather = ({ currentWeather }) => {
   
     <View style={styles.secondaryInfo}>
       <View style={styles.rows}>
+
+        {/* Feels like */}
         <View style={styles.detailContainer}>
           <Text style={styles.label}>Feels</Text>
           <Text style={styles.weatherDetails}>
             {Math.round(currentWeather.main && currentWeather.main.feels_like - 273.15)}°C
           </Text>
         </View>
-  
+        {/* Min temperature */}
         <View style={styles.detailContainer}>
           <Text style={styles.label}>Min</Text>
           <Text style={styles.weatherDetails}>
             {Math.round(currentWeather.main && currentWeather.main.temp_min - 273.15)}°C
           </Text>
         </View>
-  
+        {/* Max temperature */}
         <View style={styles.detailContainer}>
           <Text style={styles.label}>Max</Text>
           <Text style={styles.weatherDetails}>
@@ -50,7 +52,7 @@ const CurrentWeather = ({ currentWeather }) => {
           </Text>
         </View>
       </View>
-  
+      {/* wind speed */}
       <View style={styles.rows}>
         <View style={styles.detailContainer}>
           <Text style={styles.label}>Wind</Text>
@@ -58,24 +60,21 @@ const CurrentWeather = ({ currentWeather }) => {
             {currentWeather.wind.speed} m/s
           </Text>
         </View>
-      
+        {/* humidity */}
         <View style={styles.detailContainer}>
           <Text style={styles.label}>Humidity</Text>
           <Text style={styles.weatherDetails}>
             {currentWeather.main.humidity} %
           </Text>
         </View>
-
+        {/* pressure */}
         <View style={styles.detailContainer}>
           <Text style={styles.label}>Pressure</Text>
           <Text style={styles.weatherDetails}>
             {currentWeather.main.pressure} mbar
           </Text>
         </View>
-
       </View>
-
-
     </View>
   </View>
   
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
   mainInfo: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'top',
+    justifyContent: 'center',
   },
   secondaryInfo: {
     flex: 1,
@@ -111,9 +110,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   weatherDetails: {
-    color: 'black',
+    color: 'lightblue',
     textAlign: 'center',
     marginVertical: 5,
+    fontSize: 20
   },
   label: {
     fontSize: 15,
@@ -121,14 +121,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   weatherIcon: {
-    width: 100,
+    width: 150,
     height: 100,
   },
   cityName: {
-    marginTop: 20,
+    marginTop: 50,
     fontWeight: 'bold',
     fontSize: 20,
-  }
+    color: 'lightblue'
+  },
+  // detailsBox: {
+  //   borderColor: 'lightblue', // Border color
+  //   borderWidth: 1, // Border width
+  //   borderRadius: 20, // Border radius
+  //   paddingHorizontal: 10, // Adjust this as needed
+  //   margin: 10, // Add margin to separate from other content
+  // }
 });
 
 export default CurrentWeather;
