@@ -22,7 +22,7 @@ const CurrentWeather = ({ currentWeather }) => {
         />
       )}
       <Text style={styles.weatherDetails}>
-        Temperature: {Math.round(currentWeather.main && currentWeather.main.temp - 273.15)}°C
+        {Math.round(currentWeather.main && currentWeather.main.temp - 273.15)}°C
       </Text>
       <Text style={styles.weatherDetails}>{currentWeather.weather[0].description}</Text>
     </View>
@@ -59,14 +59,20 @@ const CurrentWeather = ({ currentWeather }) => {
           </Text>
         </View>
       
-
-      
         <View style={styles.detailContainer}>
           <Text style={styles.label}>Humidity</Text>
           <Text style={styles.weatherDetails}>
             {currentWeather.main.humidity} %
           </Text>
         </View>
+
+        <View style={styles.detailContainer}>
+          <Text style={styles.label}>Pressure</Text>
+          <Text style={styles.weatherDetails}>
+            {currentWeather.main.pressure} mbar
+          </Text>
+        </View>
+
       </View>
 
 
@@ -85,12 +91,12 @@ const styles = StyleSheet.create({
   mainInfo: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'top',
   },
   secondaryInfo: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'top',
   },
   rows: {
     flexDirection: 'row',
@@ -98,6 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 10,
+    marginVertical: 10,
   },
   detailContainer: {
     flex: 1,
@@ -106,6 +113,7 @@ const styles = StyleSheet.create({
   weatherDetails: {
     color: 'black',
     textAlign: 'center',
+    marginVertical: 5,
   },
   label: {
     fontSize: 15,
