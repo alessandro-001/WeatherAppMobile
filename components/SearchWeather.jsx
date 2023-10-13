@@ -18,10 +18,11 @@ const SearchWeather = ({ toggleSearch, setToggleSearch, city, setCity, fetchWeat
       <Text style={styles.buttonLbl}>Search by City: </Text>
       <View style={styles.search}>
         <TextInput
-          style={styles.input}
+          style={[styles.input, { fontWeight: 'normal' }]}
           onChangeText={setCity}
           value={city}
-          placeholder="Enter City Name"
+          placeholder="Enter City Name..."
+          placeholderTextColor='lightblue'
           onSubmitEditing={handleSearch}
         />
         <TouchableOpacity style={styles.button} onPress={handleSearch}>

@@ -9,7 +9,7 @@ import Background2 from './assets/Wallpaper2.png';
 
 export default function App() {
   const [toggleSearch, setToggleSearch] = useState('city');
-  const [city, setCity] = useState('Manchester');
+  const [city, setCity] = useState('');
   const [lat, setLat] = useState();
   const [long, setLong] = useState();
   const [weather, setWeather] = useState({});
