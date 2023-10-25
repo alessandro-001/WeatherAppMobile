@@ -10,15 +10,16 @@
   },
   "dependencies": {
     "expo": "~49.0.13",
+    "expo-constants": "~14.4.2",
     "expo-status-bar": "~1.6.0",
     "moment": "^2.29.4",
     "react": "18.2.0",
     "react-native": "0.72.5",
-    "react-native-dotenv": "^3.4.9",
-    "expo-constants": "~14.4.2"
+    "react-native-dotenv": "^3.4.9"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.23.2",
+    "@babel/traverse": "^7.23.2"
   },
   "private": true
 }
